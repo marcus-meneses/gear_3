@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+ 
+read -p 'Por favor, digite o nome do pacote de frontend a usar na aplicação: ' frontname 
+   
+
+ if [ -z "$frontname"  ]; 
+ then
+    frontname='main'
+ fi
+
+sed -i "s/\$config\['template'\]=.*/\$config\['template'\]='${frontname}';/" ./application/config/config.php

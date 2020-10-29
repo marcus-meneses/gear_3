@@ -1,0 +1,10 @@
+ 
+read -p "Digite a nova chave de criptografia da aplicação (vazio = random): " cryptok
+
+  if [ -z "$cryptok"  ]; 
+ then
+    cryptok=$(cat /dev/urandom | tr -dc 'A-Z0-9' | fold -w 64 | head -n 1)
+ fi
+
+
+sed -i "s/\$config\['cryptokey'\]=.*/\$config\['cryptokey'\]='${cryptok}';/" ./application/config/config.php

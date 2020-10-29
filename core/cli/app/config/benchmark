@@ -1,0 +1,50 @@
+#!/bin/bash
+
+ev=0; 
+bm=0;
+
+while true; do
+    read -p "Deseja usar algum método built-in de benchmark? (s/n) : " yn
+    case $yn in
+        [Ss]* ) ev=1; break;;
+        [Nn]* ) ev=0; break;;
+        * ) echo "Por favor, responda apenas (S)im ou (N)ão.";;
+    esac
+done
+
+ if [ $ev = 1 ]; 
+ then
+     
+
+while true; do
+    read -p "Selecione o método (e)cho, (a)lert ou (s)ilent : " bmt
+    case $bmt in
+        [Ee]* ) bm=1; break;;
+        [Aa]* ) bm=2; break;;
+        [Ss]* ) bm=3; break;;
+        * ) echo "Por favor, responda (e)cho, (a)lert ou (s)ilent.";;
+    esac
+done
+
+
+
+ else
+     echo 'Não utilizando benchmark.';
+     sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='none';/" ./application/config/config.php
+     exit;
+ fi
+   
+ if [ $bm = 1 ]; 
+ then
+      sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='echo';/" ./application/config/config.php
+ fi
+
+ if [ $bm = 2 ]; 
+ then
+      sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='alert';/" ./application/config/config.php    
+ fi
+
+ if [ $bm = 3 ]; 
+ then
+      sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='silent';/" ./application/config/config.php    
+ fi

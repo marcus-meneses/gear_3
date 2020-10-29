@@ -1,0 +1,3 @@
+
+Instala um novo pacote de front-end para a aplicação na estrutura de arquivos do framework.
+Para habilitar um pacote de front-end, utilizar o comando gear config front.

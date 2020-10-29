@@ -1,0 +1,4 @@
+
+Gera um novo módulo de nome <NOME> na estrutura de pastas
+do framework e cria a rota para o módulo sem qualquer controle de
+autenticação.

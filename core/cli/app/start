@@ -1,0 +1,261 @@
+
+#!/bin/bash
+#------------------- name ------------------------------------
+read -p 'Por favor, digite o novo nome da aplicação (Gear APP): ' appname 
+
+  if [ -z "$appname"  ]; 
+ then
+    appname='Gear APP'
+ fi
+
+sed -i "s/\$config\['appname'\]=.*/\$config\['appname'\]='${appname}';/" ./application/config/config.php
+
+
+#------------------- front  ------------------------------------
+
+read -p 'Por favor, digite o nome do pacote de frontend a usar na aplicação (main): ' frontname 
+
+  if [ -z "$frontname"  ]; 
+ then
+    frontname='main'
+ fi
+
+sed -i "s/\$config\['template'\]=.*/\$config\['template'\]='${frontname}';/" ./application/config/config.php
+
+#------------------- default Route  ------------------------------------
+
+read -p 'Por favor, digite a rota padrão a usar na aplicação (home/index): ' defroute 
+
+  if [ -z "$defroute"  ]; 
+ then
+    defroute='home/index'
+ fi
+
+sed -i "s/\$config\['defaultRoute'\]=.*/\$config\['defaultRoute'\]='${defroute}';/" ./application/config/config.php
+
+#------------------- bench ------------------------------------
+
+ev=0; 
+bm=0;
+
+while true; do
+    read -p "Deseja usar algum método built-in de benchmark? (s/n) : " yn
+    case $yn in
+        [Ss]* ) ev=1; break;;
+        [Nn]* ) ev=0; break;;
+        * ) echo "Por favor, responda apenas (S)im ou (N)ão.";;
+    esac
+done
+
+ if [ $ev = 1 ]; 
+ then
+     
+
+while true; do
+    read -p "Selecione o método (e)cho, (a)lert ou (s)ilent : " bmt
+    case $bmt in
+        [Ee]* ) bm=1; break;;
+        [Aa]* ) bm=2; break;;
+        [Ss]* ) bm=3; break;;
+        * ) echo "Por favor, responda (e)cho, (a)lert ou (s)ilent.";;
+    esac
+done
+
+
+
+ else
+     echo 'Não utilizando benchmark.';
+     sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='none';/" ./application/config/config.php
+     exit;
+ fi
+   
+ if [ $bm = 1 ]; 
+ then
+      sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='echo';/" ./application/config/config.php
+ fi
+
+ if [ $bm = 2 ]; 
+ then
+      sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='alert';/" ./application/config/config.php    
+ fi
+
+ if [ $bm = 3 ]; 
+ then
+      sed -i "s/\$config\['benchmarkMethod'\]=.*/\$config\['benchmarkMethod'\]='silent';/" ./application/config/config.php    
+ fi
+
+#------------------- exception ------------------------------------
+
+ev=0; 
+bm=0;
+
+while true; do
+    read -p "Deseja usar o mecanismo built-in de exceções? (s/n) : " yn
+    case $yn in
+        [Ss]* ) ev=1; break;;
+        [Nn]* ) ev=0; break;;
+        * ) echo "Por favor, responda apenas (S)im ou (N)ão.";;
+    esac
+done
+
+ if [ $ev = 1 ]; 
+ then
+     
+
+while true; do
+    read -p "Selecione o método de notificação (s)ilent (e)cho (a)lert ou (t)race : " bmt
+    case $bmt in
+        [Ss]* ) bm=1; break;;
+        [Ee]* ) bm=2; break;;
+        [Aa]* ) bm=3; break;;
+        [Tt]* ) bm=4; break;;
+        * ) echo "Por favor, responda (s)ilent (e)cho (a)lert ou (t)race";;
+    esac
+done
+
+
+ else
+     echo 'Não utilizando exceções.';
+     echo 'ATENÇÃO: EXCEÇÕES DO FRAMEWORK NÃO SÃO CAPTURADAS.'
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=false;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='silent';/" ./application/config/config.php
+ fi
+   
+ if [ $bm = 1 ]; 
+ then
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='silent';/" ./application/config/config.php
+fi
+
+ if [ $bm = 2 ]; 
+ then
+    sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+    sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='echo';/" ./application/config/config.php
+fi
+
+ if [ $bm = 3 ]; 
+ then
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='alert';/" ./application/config/config.php
+ fi
+
+  if [ $bm = 4 ]; 
+ then
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='trace';/" ./application/config/config.php
+ fi
+
+#------------------- log ------------------------------------
+
+
+#------------------- auth ------------------------------------
+
+ev=0; 
+bm=0;
+
+while true; do
+    read -p "Deseja usar o processo built-in de autorização? (s/n) : " yn
+    case $yn in
+        [Ss]* ) ev=1; break;;
+        [Nn]* ) ev=0; break;;
+        * ) echo "Por favor, responda apenas (S)im ou (N)ão.";;
+    esac
+done
+
+ if [ $ev = 1 ]; 
+ then
+     
+
+while true; do
+    read -p "Selecione o método de controle de acesso (e)xceção ou (r)edirecionamento : " bmt
+    case $bmt in
+        [Ee]* ) bm=1; break;;
+        [Rr]* ) bm=2; break;;
+        * ) echo "Por favor, responda (e)cho, (e)xceção ou (r)edirecionamento.";;
+    esac
+done
+
+
+
+ else
+     echo 'Não utilizando autorização.';
+     echo 'ATENÇÃO: SEU SISTEMA NÃO POSSUIRÁ CONTROLE DE ACESSO.'
+     sed -i "s/\$config\['authorization'\]=.*/\$config\['authorization'\]=false;/" ./application/config/config.php
+     sed -i "s/\$config\['authorizationHandle'\]=.*/\$config\['authorizationHandle'\]='none';/" ./application/config/config.php
+     #exit;
+ fi
+   
+ if [ $bm = 1 ]; 
+ then
+      sed -i "s/\$config\['authorization'\]=.*/\$config\['authorization'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['authorizationHandle'\]=.*/\$config\['authorizationHandle'\]='exception';/" ./application/config/config.php
+ fi
+
+ if [ $bm = 2 ]; 
+ then
+      sed -i "s/\$config\['authorization'\]=.*/\$config\['authorization'\]=true;/" ./application/config/config.php
+      sed -i "s/\$config\['authorizationHandle'\]=.*/\$config\['authorizationHandle'\]='redirect';/" ./application/config/config.php
+ fi
+
+
+#------------------- database ------------------------------------
+
+
+
+ev=0; 
+ 
+while true; do
+    read -p "Selecione o DB a utilizar nas classes de dataAccess (M)ySql : " yn
+    case $yn in
+        [Mm]* ) ev=1; break;;
+        * ) echo "Apenas (M)ySql disponível.";;
+    esac
+done
+
+
+ if [ $ev = 1 ]; 
+ then
+    sed -i "s/\$databaseConfig\['broker'\]=.*/\$databaseConfig\['broker'\]='MYSQL';/" ./application/config/config.php
+ fi
+
+
+
+ read -p "Entre com o endereço do seu host de database (padrão: localhost) : " dbhost
+ read -p "Entre com a porta do seu host de database (padrão: 3306) : " dbport
+ read -p "Entre com o nome do seu database : " dbname
+ read -p "Entre com o seu usuário do database : " dbuser
+ read -p "Entre com a senha do seu usuário do database : " dbpass
+
+ if [ -z "$dbhost"  ]; 
+ then
+    dbhost='localhost'
+ fi
+
+  if [ -z "$dbport"  ]; 
+ then
+    dbport='3306'
+ fi
+
+  if [ -z "$dbname"  ]; 
+ then
+    dbname='gear_dev'
+ fi
+
+  if [ -z "$dbuser"  ]; 
+ then
+    dbuser='root'
+ fi
+
+  if [ -z "$dbpass"  ]; 
+ then
+    dbpass='root'
+ fi
+
+ sed -i "s/\$databaseConfig\['host'\]=.*/\$databaseConfig\['host'\]='${dbhost}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['port'\]=.*/\$databaseConfig\['port'\]='${dbport}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['username'\]=.*/\$databaseConfig\['username'\]='${dbuser}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['password'\]=.*/\$databaseConfig\['password'\]='${dbpass}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['database'\]=.*/\$databaseConfig\['database'\]='${dbname}';/" ./application/config/config.php
+
+ 
+

@@ -1,0 +1,7 @@
+
+Gera um novo model de nome <NOME> na estrutura de pastas
+do module <MODULE>. O model criado não contém nenhuma informação de
+ORM.
+
+Exemplo:
+gear new model home user

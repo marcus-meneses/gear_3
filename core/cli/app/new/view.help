@@ -1,0 +1,6 @@
+
+Gera um novo view de nome <NOME> na estrutura de pastas
+do module <MODULE>. O view criado tem apenas um olá mundo com sua identificação.
+
+Exemplo:
+gear new view home login

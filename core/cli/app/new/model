@@ -1,0 +1,22 @@
+DIR="$PWD/application/modules/$1/models"
+
+echo "criando model $2 em $DIR"
+
+if [ -d "$DIR" ]; then
+
+if [ -f "$DIR/$2.php" ]; then
+    echo "Model já existe, exclua para criar novamente."
+    exit;
+fi
+
+file="$DIR/$2.php"
+
+touch "$file"
+
+printstr="<?php\n\nclass ${2^}Model extends Model\n{\n\n\n\n}";
+echo -e $printstr >> "$file"
+
+  exit;
+fi 
+
+echo "Módulo inexistente, verificar sistema de arquivos."

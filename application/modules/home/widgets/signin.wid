@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="<?php echo $this->App->base_url('public/files/themes/main/css/signin.css')?>" type="text/css">
+
+ <body class="text-center">
+ <form class="form-signin" action="login" method="POST">
+  <img class="mb-4" style="border-radius: 20%;" src="<?php echo $this->App->base_url('public/files/themes/main/img/'.rand(1 , 7).'.jpeg');?>" alt="" width=40%" height="auto">
+  <h1 class="h3 mb-3 font-weight-normal">Olá novamente</h1>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de e-mail" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> Lembrar minha senha
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+</form>
+</body>

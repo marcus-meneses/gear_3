@@ -1,0 +1,13 @@
+#!/bin/bash
+
+read -p 'Por favor, digite a rota padrão a usar na aplicação (home/index): ' defroute 
+
+
+if [ -z "$defroute"  ]; 
+then
+    defroute="home/index"
+fi
+
+ 
+
+sed -i "s@\$config\['defaultRoute'\]=.*@\$config\['defaultRoute'\]='${defroute}';@" ./application/config/config.php

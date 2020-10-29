@@ -1,0 +1,48 @@
+#!/bin/bash
+
+ev=0; 
+bm=0;
+
+while true; do
+    read -p "Deseja usar o processo built-in de autorização? (s/n) : " yn
+    case $yn in
+        [Ss]* ) ev=1; break;;
+        [Nn]* ) ev=0; break;;
+        * ) echo "Por favor, responda apenas (S)im ou (N)ão.";;
+    esac
+done
+
+ if [ $ev = 1 ]; 
+ then
+     
+
+while true; do
+    read -p "Selecione o método de controle de acesso (e)xceção ou (r)edirecionamento : " bmt
+    case $bmt in
+        [Ee]* ) bm=1; break;;
+        [Rr]* ) bm=2; break;;
+        * ) echo "Por favor, responda (e)cho, (e)xceção ou (r)edirecionamento.";;
+    esac
+done
+
+
+
+ else
+     echo 'Não utilizando autorização.';
+     echo 'ATENÇÃO: SEU SISTEMA NÃO POSSUIRÁ CONTROLE DE ACESSO.'
+     sed -i "s/\$config\['authorization'\]=.*/\$config\['authorization'\]=false;/" ./application/config/config.php
+     sed -i "s/\$config\['authorizationHandle'\]=.*/\$config\['authorizationHandle'\]='none';/" ./application/config/config.php
+     exit;
+ fi
+   
+ if [ $bm = 1 ]; 
+ then
+      sed -i "s/\$config\['authorization'\]=.*/\$config\['authorization'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['authorizationHandle'\]=.*/\$config\['authorizationHandle'\]='exception';/" ./application/config/config.php
+ fi
+
+ if [ $bm = 2 ]; 
+ then
+      sed -i "s/\$config\['authorization'\]=.*/\$config\['authorization'\]=true;/" ./application/config/config.php
+      sed -i "s/\$config\['authorizationHandle'\]=.*/\$config\['authorizationHandle'\]='redirect';/" ./application/config/config.php
+ fi

@@ -1,0 +1,5 @@
+
+Utilize o comando start para iniciar o desenvolvimento da sua aplicação
+Gear. O comando irá solicitar algumas configurações iniciais e dados 
+do seu servidor. Para modificar qualquer configuração inicial durante o 
+desenvolvimento, consulte o comando Gear config.

@@ -1,0 +1,60 @@
+#!/bin/bash
+
+ev=0; 
+bm=0;
+
+while true; do
+    read -p "Deseja usar o mecanismo built-in de exceções? (s/n) : " yn
+    case $yn in
+        [Ss]* ) ev=1; break;;
+        [Nn]* ) ev=0; break;;
+        * ) echo "Por favor, responda apenas (S)im ou (N)ão.";;
+    esac
+done
+
+ if [ $ev = 1 ]; 
+ then
+     
+
+while true; do
+    read -p "Selecione o método de notificação (s)ilent (e)cho (a)lert ou (t)race : " bmt
+    case $bmt in
+        [Ss]* ) bm=1; break;;
+        [Ee]* ) bm=2; break;;
+        [Aa]* ) bm=3; break;;
+        [Tt]* ) bm=4; break;;
+        * ) echo "Por favor, responda (s)ilent (e)cho (a)lert ou (t)race";;
+    esac
+done
+
+
+ else
+     echo 'Não utilizando exceções.';
+     echo 'ATENÇÃO: EXCEÇÕES DO FRAMEWORK NÃO SÃO CAPTURADAS.'
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=false;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='silent';/" ./application/config/config.php
+ fi
+   
+ if [ $bm = 1 ]; 
+ then
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='silent';/" ./application/config/config.php
+fi
+
+ if [ $bm = 2 ]; 
+ then
+    sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+    sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='echo';/" ./application/config/config.php
+fi
+
+ if [ $bm = 3 ]; 
+ then
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='alert';/" ./application/config/config.php
+ fi
+
+  if [ $bm = 4 ]; 
+ then
+     sed -i "s/\$config\['exceptionNotify'\]=.*/\$config\['exceptionNotify'\]=true;/" ./application/config/config.php
+     sed -i "s/\$config\['exceptionNotifyMethod'\]=.*/\$config\['exceptionNotifyMethod'\]='trace';/" ./application/config/config.php
+ fi

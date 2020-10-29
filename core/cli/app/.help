@@ -1,0 +1,5 @@
+Esta é a aplicação de linha de comando do framework Gear.
+Deve ser utilizada para gerar automaticamente os componentes
+da sua aplicação, como módulos, modelos, views e widgets, bem
+como instalar pacotes de templates e bibliotecas e serviços
+originais e de terceiros.

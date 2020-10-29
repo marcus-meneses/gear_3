@@ -1,0 +1,30 @@
+ <section id="autoload-section" class="doc-section">
+                                <h2 class="section-title">Autoload</h2>
+                                <div class="section-block">
+                                    <p>O arquivo application/config/autoload.php contém três arrays que podem ser preenchidos com os serviços, plugins e modelos que o desenvolvedor deseja carregar em qualquer instância de qualquer módulo.
+                                 </p>
+                                 <div id="php" class="section-block">
+                                    <div class="code-block">
+                                        <h6>Exemplo de autoload.php</h6>
+                                        <pre><code class="language-php">&lt;?php 
+$autoload[&quot;services&quot;]  = array(&quot;mysql&quot;,&quot;email&quot;,&quot;requests&quot;);
+$autoload[&quot;models&quot;]  = array(&quot;home.example&quot;);
+$autoload[&quot;plugins&quot;]   = array(&quot;hooks&quot;);
+
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->   
+                                 <p>
+                                    Deve-se observar que os serviços e modelos são instanciados no nível do controller, já os plugins são instanciados no nível do APP e têm acesso aos elementos do querystring e aos dados da requisição antes do restante da aplicação. Após a execução de um plugin, dados são propagados para o plugin imediatamente posterior na lista (via callbacks).
+                                    </p>
+                                </div><!--//section-block-->
+                                <div class="section-block">
+                                    <h6>Elegant Icon Font</h6>
+                                    <a href="https://www.elegantthemes.com/blog/resources/elegant-icon-font" target="_blank"><img class="img-fluid" src="assets/images/demo/elegant-icon-font.jpg" alt="elegant icons" /></a>
+                                </div><!--//section-block-->
+                                <div class="section-block">
+                                    <h6>FontAwesome Icon Font</h6>
+                                    <a href="https://fortawesome.github.io/Font-Awesome/" target="_blank"><img class="img-fluid" src="assets/images/demo/fontawesome-icons.png" alt="fontawesome" /></a>
+                                </div><!--//section-block-->
+                                
+                            </section><!--//doc-section-->

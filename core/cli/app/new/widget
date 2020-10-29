@@ -1,0 +1,22 @@
+DIR="$PWD/application/modules/$1/widgets"
+
+echo "criando widget $2 em $DIR"
+
+if [ -d "$DIR" ]; then
+
+if [ -f "$DIR/$2.wid" ]; then
+    echo "Widget já existe, exclua para criar novamente."
+    exit;
+fi
+
+file="$DIR/$2.wid"
+
+touch "$file"
+
+printstr="<?php\necho '$1 - $2';"
+echo -e $printstr >> "$file"
+
+  exit;
+fi 
+
+echo "Módulo inexistente, verificar sistema de arquivos."

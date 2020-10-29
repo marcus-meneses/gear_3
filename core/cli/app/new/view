@@ -1,0 +1,22 @@
+DIR="$PWD/application/modules/$1/views"
+
+echo "criando view $2 em $DIR"
+
+if [ -d "$DIR" ]; then
+
+if [ -f "$DIR/$2.php" ]; then
+    echo "View já existe, exclua para criar novamente."
+    exit;
+fi
+
+file="$DIR/$2.php"
+
+touch "$file"
+
+printstr="<?php\n\nclass ${2^} extends View\n{\n\n  public function render()\n	{\n\n	\$this->loadTemplateComponent('header');\n	\$this->loadTemplateComponent('footer');\n\n  }\n\n}";
+echo -e $printstr >> "$file"
+
+  exit;
+fi 
+
+echo "Módulo inexistente, verificar sistema de arquivos."

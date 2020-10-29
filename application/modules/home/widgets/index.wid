@@ -1,0 +1,5 @@
+<?php
+//echo "index";
+print_r($this->Data); 
+//echo $this->App->base_url('public/css/one.css');
+?>

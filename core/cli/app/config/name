@@ -1,0 +1,6 @@
+
+ 
+read -p 'Por favor, digite o novo nome da aplicação: ' appname 
+sed -i "s/\$config\['appname'\]=.*/\$config\['appname'\]='${appname}';/" ./application/config/config.php
+
+ 

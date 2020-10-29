@@ -1,0 +1,63 @@
+
+
+ev=0; 
+ 
+while true; do
+    read -p "Selecione o DB a utilizar nas classes de dataAccess (M)ySql : " yn
+    case $yn in
+        [Mm]* ) ev=1; break;;
+        * ) echo "Apenas (M)ySql disponível.";;
+    esac
+done
+
+
+ if [ $ev = 1 ]; 
+ then
+    sed -i "s/\$databaseConfig\['broker'\]=.*/\$databaseConfig\['broker'\]='MYSQL';/" ./application/config/config.php
+ fi
+
+
+
+ read -p "Entre com o endereço do seu host de database (padrão: localhost) : " dbhost
+ read -p "Entre com a porta do seu host de database (padrão: 3306) : " dbport
+ read -p "Entre com o nome do seu database : " dbname
+ read -p "Entre com o seu usuário do database : " dbuser
+ read -p "Entre com a senha do seu usuário do database : " dbpass
+
+ if [ -z "$dbhost"  ]; 
+ then
+    dbhost='localhost'
+ fi
+
+  if [ -z "$dbport"  ]; 
+ then
+    dbport='3306'
+ fi
+
+  if [ -z "$dbname"  ]; 
+ then
+    dbname='gear_dev'
+ fi
+
+  if [ -z "$dbuser"  ]; 
+ then
+    dbuser='root'
+ fi
+
+  if [ -z "$dbpass"  ]; 
+ then
+    dbpass='root'
+ fi
+
+ sed -i "s/\$databaseConfig\['host'\]=.*/\$databaseConfig\['host'\]='${dbhost}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['port'\]=.*/\$databaseConfig\['port'\]='${dbport}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['username'\]=.*/\$databaseConfig\['username'\]='${dbuser}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['password'\]=.*/\$databaseConfig\['password'\]='${dbpass}';/" ./application/config/config.php
+ sed -i "s/\$databaseConfig\['database'\]=.*/\$databaseConfig\['database'\]='${dbname}';/" ./application/config/config.php
+
+#$databaseConfig['broker'] 	        =  'MYSQL';
+#$databaseConfig['host'] 	        =  'localhost';
+#$databaseConfig['port']		        =  '3306';
+#$databaseConfig['username']	        =  'root';
+#$databaseConfig['password']	        =  'root';
+#$databaseConfig['database']	        =  'gear_dev'; 
